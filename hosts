@@ -1,0 +1,14 @@
+[webservers]
+192.168.56.108
+
+[dbservers]
+192.168.56.107
+
+[webservers:vars]
+ansible_user=root
+ansible_ssh_private_key_file=./Debian-ANSIBLE
+
+[dbservers:vars]
+ansible_user=root
+ansible_ssh_private_key_file=./CentOS-ANSIBLE
+ansible_python_interpreter=/usr/bin/python
