@@ -4,7 +4,9 @@
       shell: yum update -y
 
     - name: 2.1 - Install MariaDB
-      yum: name=mariadb-server,MySQL-python state=latest
+      become: true
+      action: >
+        {{ ansible_pkg_mgr }} name=mariadb-server,MySQL-python state=latest update_cache=yes
 
     - name: 2.2 - Start MariaDB
       service: 
