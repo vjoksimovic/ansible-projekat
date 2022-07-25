@@ -3,10 +3,9 @@
     - name: 2.0 - Upgrade All Packages
       shell: yum update -y
 
-    - name: 2.1 - Install MariaDB
-      become: true
-      action: >
-        {{ ansible_pkg_mgr }} name=mariadb-server,MySQL-python state=latest update_cache=yes
+    - name: Database Server
+      ansible.builtin.include_role:
+        name: db_distrocheck 
 
     - name: 2.2 - Start MariaDB
       service: 
