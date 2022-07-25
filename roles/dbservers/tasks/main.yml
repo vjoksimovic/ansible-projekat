@@ -1,0 +1,67 @@
+---
+# tasks file for dbservers
+    - name: 2.0 - Upgrade All Packages
+      shell: yum update -y
+
+    - name: 2.1 - Install MariaDB
+      yum: name=mariadb-server,MySQL-python state=latest
+
+    - name: 2.2 - Start MariaDB
+      service: 
+        name: mariadb
+        enabled: true
+        state: started
+
+    - name: 2.3 - Create a Database User
+      mysql_user:
+        name: root
+        password: root
+      # priv: '*.*:ALL'
+      # host_all: yes
+        state: present
+        login_user: root
+        login_password: root
+
+    - name: 2.4 - Create a New Database
+      mysql_db:
+        name: secondopinion
+        login_user: root
+        login_password: root
+
+  #  - name: 2.4.1 - Grant Database Access to Webserver
+  #     community.mysql.mysql_query:
+  #      login_user: root
+  #      login_password: root
+  #      query: RENAME USER 'root'@'192.168.56.108' TO 'root'@'localhost';
+ 
+    - name: 2.5 - Create Table - Customer
+      community.mysql.mysql_query:
+        login_user: root
+        login_password: root
+        login_db: secondopinion
+        query: CREATE TABLE `customer` (
+            `id` int(11) NOT NULL,
+            `email` varchar(255) NOT NULL,
+            `password` varchar(255) NOT NULL,
+            `last_name` varchar(255) DEFAULT NULL,
+            `first_name` varchar(255) DEFAULT NULL,
+            `gender` varchar(256) NOT NULL
+          );
+
+    - name: 2.6 - Create Table - Conversation 
+      community.mysql.mysql_query:
+        login_db: secondopinion
+        login_user: root
+        login_password: root
+        query: CREATE TABLE `conversation` (
+            `id` int(11) UNSIGNED NOT NULL,
+            `senderEmail` varchar(256) DEFAULT NULL,
+            `receiverEmail` varchar(256) DEFAULT NULL,
+            `message` mediumtext
+          );
+
+    - name: 2.7 - Open MySQL Port to Webserver 
+      command: firewall-cmd --permanent --zone=public --add-port=3306/tcp
+
+    - name: 2.8 - Reload Firewall 
+      command: firewall-cmd --reload

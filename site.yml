@@ -1,2 +1,8 @@
-- import_playbook: webserver.yml
-- import_playbook: database.yml
+---
+- hosts: webservers
+  roles:
+    - {role: webservers}
+
+- hosts: dbservers
+  roles:
+    - {role: dbservers}
