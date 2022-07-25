@@ -2,8 +2,6 @@
 
 - hosts: dbservers
   become: true
-  vars:
-    mysql_root_password: root
   tasks:
     - name: 2.0 - Upgrade All Packages
       shell: yum update -y
