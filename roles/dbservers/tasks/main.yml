@@ -19,31 +19,19 @@
         host: 192.168.56.108
         state: present
         login_user: root
-        login_password: root
+        login_password: "{{ db_password }}"
         priv: "*.*:ALL"
-
-  #  - name: 2.4 - Give Database Privileges 
-  #    community.mysql.mysql_query:
-  #      login_user: root
-  #      login_password: root
-  #      query: GRANT ALL PRIVILEGES ON *.* TO 'veljo'@'%' IDENTIFIED BY 'veljo';
-
-
-      #  query: BEGIN;
-      #    CREATE USER 'veljo'@'localhost' IDENTIFIED BY 'veljo';
-      #    GRANT ALL PRIVILEGES ON *.* TO 'veljo'@'localhost' IDENTIFIED BY 'veljo';
-      #    END;
   
     - name: 2.5 - Create a New Database
       mysql_db:
         name: secondopinion
         login_user: root
-        login_password: root
+        login_password: "{{ db_password }}"
         
     - name: 2.6 - Create Table - Customer
       community.mysql.mysql_query:
         login_user: root
-        login_password: root
+        login_password: "{{ db_password }}"
         login_db: secondopinion
         query: CREATE TABLE `customer` (
             `id` int(11) NOT NULL,
@@ -58,7 +46,7 @@
       community.mysql.mysql_query:
         login_db: secondopinion
         login_user: root
-        login_password: root
+        login_password: "{{  db_password }}"
         query: CREATE TABLE `conversation` (
             `id` int(11) UNSIGNED NOT NULL,
             `senderEmail` varchar(256) DEFAULT NULL,
