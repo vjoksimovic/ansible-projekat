@@ -13,26 +13,33 @@
         state: started
 
     - name: 2.3 - Create a Database User
-      community.mysql.mysql_query:
+      mysql_user:
+        name: veljo
+        password: veljo
+        host: 192.168.56.108
+        state: present
         login_user: root
         login_password: root
-        query: BEGIN;
-          CREATE USER 'veljo'@'localhost' IDENTIFIED BY 'veljo';
-          GRANT ALL PRIVILEGES ON *.* TO 'veljo'@'localhost' IDENTIFIED BY 'veljo';
-          END;
+        priv: "*.*:ALL"
+
+  #  - name: 2.4 - Give Database Privileges 
+  #    community.mysql.mysql_query:
+  #      login_user: root
+  #      login_password: root
+  #      query: GRANT ALL PRIVILEGES ON *.* TO 'veljo'@'%' IDENTIFIED BY 'veljo';
+
+
+      #  query: BEGIN;
+      #    CREATE USER 'veljo'@'localhost' IDENTIFIED BY 'veljo';
+      #    GRANT ALL PRIVILEGES ON *.* TO 'veljo'@'localhost' IDENTIFIED BY 'veljo';
+      #    END;
   
     - name: 2.5 - Create a New Database
       mysql_db:
         name: secondopinion
         login_user: root
         login_password: root
-
-  #  - name: 2.4.1 - Grant Database Access to Webserver
-  #     community.mysql.mysql_query:
-  #      login_user: root
-  #      login_password: root
-  #      query: RENAME USER 'root'@'192.168.56.108' TO 'root'@'localhost';
- 
+        
     - name: 2.6 - Create Table - Customer
       community.mysql.mysql_query:
         login_user: root
