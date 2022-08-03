@@ -1,11 +1,11 @@
-1) Folder structure.
+1) Folder structure. <DONE>
 - role_name
     - tasks
         - main.yml
     - vars
         - main.yml
 
-2) Do not keep ssh keys in any folder then ~/.ssh/.
+2) Do not keep ssh keys in any folder then ~/.ssh/. <DONE>
 3) No manual steps during the deployment
 4) Split the roles into the smaller ones.
     - install_prerequisites (git, etc.)

@@ -1,0 +1,6 @@
+---
+# tasks file for web_distrocheck
+    - name: 1.1 - Install Latest Version of Apache
+      become: true
+      action: >
+        {{ ansible_pkg_mgr }} name=apache2,php,php-mysql,libapache2-mod-php state=latest update_cache=yes
