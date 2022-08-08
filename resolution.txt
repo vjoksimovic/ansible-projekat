@@ -6,7 +6,7 @@
         - main.yml
 
 2) Do not keep ssh keys in any folder then ~/.ssh/. <DONE>
-3) No manual steps during the deployment
+3) No manual steps during the deployment <DONE>
 4) Split the roles into the smaller ones.
     - install_prerequisites (git, etc.)
     - install_database

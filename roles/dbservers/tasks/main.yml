@@ -27,6 +27,15 @@
         name: secondopinion
         login_user: root
         login_password: "{{ db_password }}"
+
+    - name: Clear Tables
+      community.mysql.mysql_query:
+        login_user: root
+        login_password: "{{ db_password }}"
+        login_db: secondopinion
+        query:
+          - DROP TABLE customer;
+          - DROP TABLE conversation;
         
     - name: 2.6 - Create Table - Customer
       community.mysql.mysql_query:
