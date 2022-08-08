@@ -14,7 +14,7 @@
 
     - name: 1.3 - Delete Default Localhost File
       file:
-        path: /var/www/html/index.html
+        path: /var/www/html/
         state: absent
 
     - name: 1.4 - Pull Localhost Application via Git
@@ -36,7 +36,7 @@
       lineinfile:
         path: /var/www/html/php/reg.php
         search_string: $username = "ilijaaaa";
-        line: $username = "root";
+        line: $username = "veljo";
         state: present
         backup: yes
       become: true
@@ -45,7 +45,7 @@
       lineinfile:
         path: /var/www/html/php/reg.php
         search_string: $password = "ilija 123";
-        line: $password = "root";
+        line: $password = "veljo";
         state: present
         backup: yes
       become: true
@@ -63,7 +63,7 @@
       lineinfile:
         path: /var/www/html/php/config.php
         search_string: $username = "ilijaaaa";
-        line: $username = "root";
+        line: $username = "veljo";
         state: present
         backup: yes
       become: true
@@ -72,7 +72,7 @@
       lineinfile:
         path: /var/www/html/php/config.php
         search_string: $password = "ilija 123";
-        line: $password = "root";
+        line: $password = "veljo";
         state: present
         backup: yes
       become: true

@@ -1,0 +1,17 @@
+1) Folder structure. <DONE>
+- role_name
+    - tasks
+        - main.yml
+    - vars
+        - main.yml
+
+2) Do not keep ssh keys in any folder then ~/.ssh/. <DONE>
+3) No manual steps during the deployment <DONE>
+4) Split the roles into the smaller ones.
+    - install_prerequisites (git, etc.)
+    - install_database
+    - install apache
+    - configure_database
+    - deploy_project
+
+5) Store db-address, db-name and db-login in the repo as a plain text. And password should be also stored in the repo, but it should be encrypted with ansible-vault
